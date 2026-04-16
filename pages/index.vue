@@ -13,7 +13,7 @@
       style="border-radius: 25px; 
       box-shadow: 0 100px 300px rgba(0,0,0,0.9);"
     >
-      <v-card-title class="mb-3"><v-img src="/logo_PI.png" width="135" class="mx-auto"></v-img></v-card-title>
+      <v-card-title class="mb-3"><v-img src="../public/Logo_PI.png" width="135" class="mx-auto"></v-img></v-card-title>
       <div class="text-subtitle-1 text-medium-emphasis">Usuário</div>
 
       <v-text-field
@@ -21,6 +21,7 @@
         placeholder="Digite seu nome de usuário"
         prepend-inner-icon="mdi-account-outline"
         variant="outlined"
+        v-model="username"
       ></v-text-field>
 
       <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
@@ -43,6 +44,7 @@
         prepend-inner-icon="mdi-lock-outline"
         variant="outlined"
         @click:append-inner="visible = !visible"
+        v-model="password"
       ></v-text-field>
 
 
@@ -51,7 +53,7 @@
         class="mb-4 mt-3"
         color="teal-lighten-1"
         size="large"
-        to="/Dashboard"
+        @click="validCredentials"
         block
       >
         Iniciar a Sessão
@@ -65,10 +67,32 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
-  definePageMeta({
-    layout: false,
-  });
+    import { ref } from 'vue'
+    definePageMeta({
+      layout: false,
+    });
 
-const visible = ref(false)
+    const visible = ref(false)
+    const username = ref('')
+    const password = ref('')
+
+    function validCredentials() {
+      fetch('http://localhost:5000/api/usuarios/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', 
+        body: JSON.stringify ({
+          nome_usuario: username.value,
+          senha_usuario: password.value
+        })
+      }).then(response => response.json())
+        .then(data => {
+          if (data.mensagem) {
+            location.href = '/Dashboard'
+          }
+        })
+        .catch(error => console.log(JSON.stringify(error)))
+    }
   </script>

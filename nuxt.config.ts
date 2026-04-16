@@ -7,6 +7,15 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
 
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      }
+    }
+  },
+
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
