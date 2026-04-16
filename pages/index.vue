@@ -67,7 +67,7 @@
   </template>
   
   <script setup>
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
     definePageMeta({
       layout: false,
     });
@@ -95,4 +95,16 @@
         })
         .catch(error => console.log(JSON.stringify(error)))
     }
+    
+    onMounted(() => {
+      fetch('http://localhost:5000/api/usuarios/validar',{
+        method: 'GET',
+        credentials: 'include',
+      })
+        .then(response => {
+          if (response.ok) {
+            location.href = '/Dashboard'
+          }
+        })
+    });
   </script>
