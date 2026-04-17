@@ -68,10 +68,13 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCookies } from '@vueuse/integrations/useCookies'
 
 const TitlePages = useTitlePagesStore()
 const pageTitle = ref(TitlePages.pageTitle)
 const drawerstate = ref(TitlePages.drawerstate)
+
+const cookies = useCookies(['locale'])
 
 watch(() => TitlePages.pageTitle, (newTitle) => {
   pageTitle.value = newTitle
@@ -91,7 +94,18 @@ const links = [
 
 const logout = () => {
   showLogoutDialog.value = false
-  router.push('/')
+  fetch('http://localhost:5000/api/usuarios/logout', {
+    method: 'GET',
+    credentials: 'include'
+  })
+    .then(response => {
+      if (!response.ok) {
+        alert('Erro ao realizar logout');
+      } else {
+        cookies.remove('user-info')
+        router.push('/')
+      }
+    })
 }
 </script>
 

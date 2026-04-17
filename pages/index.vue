@@ -14,6 +14,7 @@
       box-shadow: 0 100px 300px rgba(0,0,0,0.9);"
     >
       <v-card-title class="mb-3"><v-img src="../public/Logo_PI.png" width="135" class="mx-auto"></v-img></v-card-title>
+      <v-alert type="error" v-model="errorMensagem">Usuário e/ou Senha inválidos</v-alert>
       <div class="text-subtitle-1 text-medium-emphasis">Usuário</div>
 
       <v-text-field
@@ -75,6 +76,7 @@
     const visible = ref(false)
     const username = ref('')
     const password = ref('')
+    const errorMensagem = ref(false);
 
     function validCredentials() {
       fetch('http://localhost:5000/api/usuarios/login', {
@@ -90,7 +92,10 @@
       }).then(response => response.json())
         .then(data => {
           if (data.mensagem) {
+            errorMensagem.value = false;
             location.href = '/Dashboard'
+          } else {
+            errorMensagem.value = true;
           }
         })
         .catch(error => console.log(JSON.stringify(error)))
