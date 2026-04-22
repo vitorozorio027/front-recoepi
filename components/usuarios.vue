@@ -113,6 +113,13 @@
     <v-text-field placeholder="Digite seu telefone..." density="compact" type="number" />
   </v-col>
 
+   <v-col cols="12">
+    <h1 class="text-caption mx-2">Tipo</h1>
+    <v-select
+        label="Select"
+        :items="['Gestor', 'Funcionário']"
+    ></v-select>
+   </v-col>
 </v-row>
 
                             <v-card-actions v-if="true" class=" ma-0 pa-0">
@@ -121,6 +128,13 @@
 
                             <v-spacer></v-spacer>
 
+                            <v-btn
+                                text="Cancelar"
+                                append-icon="mdi-close-circle"
+                                @click="dialog = false"
+                            >
+
+                            </v-btn>
                             <v-btn
                                 color="teal-lighten-1"
                                 variant="flat"
