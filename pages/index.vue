@@ -83,7 +83,7 @@
         @click="validCredentials"
         block
       >
-        Iniciar a Sessão
+        Iniciar Sessão
       </v-btn>
 
     
@@ -92,15 +92,6 @@
     </div>
 
     <v-dialog max-width="500" v-model="dialog">
-      <template v-slot:activator="{ props: activatorProps }">
-        <v-btn
-          v-bind="activatorProps"
-          color="surface-variant"
-          text="Open Dialog"
-          variant="flat"
-        ></v-btn>
-      </template>
-
       <template v-slot:default="{ isActive }">
         <v-card title="Acesso ao sistema">
           <v-card-text>
@@ -164,6 +155,7 @@
                 acaoAcesso.value = modoAcesso.PRIMEIRO_ACESSO
                 errorMensagem.value = false;
                 primeiroAcesso.value = true;
+                visible.value = false;
                 dialog.value = true;
               }else {
                 errorMensagem.value = true;
@@ -185,6 +177,7 @@
             .then(data => {
               primeiroAcesso.value = false;
               aviso.value = true
+              visible.value = false
               username.value = ''
               password.value = ''
               newPassword.value = ''
