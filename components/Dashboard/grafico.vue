@@ -53,21 +53,21 @@ onMounted(() => {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'Quantidade de Usuários Cadastrados',
+          label: 'Quantidade de Incidentes',
           data: [65, 59, 80, 81, 56, 55, 40],
           borderColor: 'rgba(255, 99, 132, 1)', // Vermelho que combina
           borderWidth: 2,
           fill: false,
         },
         {
-          label: 'Quantidade de Usuários Ativos',
+          label: 'Quantidade de Incidentes Esse Mês',
           data: [28, 48, 40, 19, 86, 27, 90],
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 2,
           fill: false,
         },
         {
-          label: 'Quantidade de Usuários Desativados',
+          label: 'Quantidade de Incidentes Essa Semana',
           data: [18, 48, 77, 9, 100, 27, 60],
           borderColor: 'rgba(255, 206, 86, 1)',
           borderWidth: 2,
@@ -85,7 +85,7 @@ onMounted(() => {
         },
         title: {
           display: true,
-          text: 'Estatísticas de Cadastro e Inspeções',
+          text: 'Estatísticas de Ocorrencias',
           font: {
             size: 17, // Ajusta o tamanho do texto do título
           },

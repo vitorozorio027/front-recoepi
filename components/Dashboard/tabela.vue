@@ -6,7 +6,7 @@
                     <v-col cols="4">
                         <v-card-title>
                             <v-icon icon="mdi-lan" class="mr-4 text-body-2" color="teal-lighten-1" ></v-icon>
-                            <v-text class="font-weight-black text-teal-lighten-1 text-caption">Usuários Cadastrados</v-text>
+                            <v-text class="font-weight-black text-teal-lighten-1 text-caption">Ocorrencias</v-text>
                         </v-card-title>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -19,6 +19,7 @@
                         v-model="search"
                         class="text-caption pa-1"
                         placeholder="Filtrar"
+                        @keypress="pesquisa"
                         style="width: 90%;"
                         >
                         
@@ -32,17 +33,31 @@
 
                 <v-data-table-virtual
                 :headers="headers"
-                :items="[]"
+                :items="data"
                 :search="search"
-                max-height="400"
+                height="400"
                 hover
                 fixed-header
                 density="compact"
                 class="text-caption my-10"
-                no-data-text="Sem Usuários Cadastrados !"
+                no-data-text="Sem Ocorrencias Registradas !"
                 >
                 
+                 <template v-bind:item="{ item }">
+                    <tr class="border-0">
+                        <td class="border-0 bg-white">
+                            <div class="border pa-1">{{ item.id }}</div>
+                        </td>
 
+                        <td class="border-0">
+                            <div class="border pa-1">{{ item.nome }}</div>
+                        </td>
+
+                        <td class="border-0 text-center">
+                            <div class="border pa-1">{{ item.data }}</div>
+                        </td>
+                    </tr>
+                </template>
                 
 
                 </v-data-table-virtual>
@@ -59,25 +74,54 @@ definePageMeta({
   layout: 'dms',
 });
 
-
+const data = ref([])
 
 const search = ref('');
 
 const headers = [
-  {
-    align: 'start',
-    key: 'tag',
-    title: 'Usuários',
-    width:'25%'
-  },
-  { key: 'descricao', title: 'Satatus Usuário' , width:'40%'},
-  //{ key: 'details', title: 'Detalhes da Instalação' },
-  //{ key: 'dataAtualizacao', title: 'Últ. Atualização', align: 'center' }
+  { key: 'id', title: 'ID' },
+  { key: 'nome', title: 'Ocorrencia' },
+  { key: 'data', title: 'Data e Hora' },
 ];
 
-  
 
+onMounted(async () => {
+    const resposta = await fetch(`http://localhost:5000/api/dashboard`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
 
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+        alert(dados.erro)
+        return;
+    }
+
+    data.value = dados;
+})
+
+const pesquisa =  async () => {
+    const resposta = await fetch(`http://localhost:5000/api/dashboard/pesquisa`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+        alert(dados.aviso)
+        return;
+    }
+
+    data.value = dados;
+}
 </script>
 
 <style>

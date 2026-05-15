@@ -5,10 +5,10 @@
         <v-card-item class="h-100">
           <div class="d-flex h-100 align-center">
             <div class="w-50 d-flex flex-column justify-center pa-2">
-              <p class="text-caption">Qtde. Usuários</p>
+              <p class="text-caption">Qtde. Incidentes</p>
               <p class="text-h3 mt-4">0</p>
             </div>
-            <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-group"></v-icon></div>
+            <!-- <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-group"></v-icon></div> -->
           </div>
         </v-card-item>
       </v-card>
@@ -19,10 +19,10 @@
         <v-card-item class="h-100">
           <div class="d-flex h-100 align-center">
             <div class="w-50 d-flex flex-column justify-center pa-2">
-              <p class="text-caption">Qtde. Usuários Ativos</p>
+              <p class="text-caption">Qtde. Incidentes Esse Mês</p>
               <p class="text-h3 mt-4">0</p>
             </div>
-            <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-check"></v-icon></div>
+            <!-- <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-check"></v-icon></div> -->
           </div>
         </v-card-item>
       </v-card>
@@ -33,10 +33,10 @@
         <v-card-item class="h-100">
           <div class="d-flex h-100 align-center">
             <div class="w-50 d-flex flex-column justify-center pa-2">
-              <p class="text-caption">Qtde. Usuários Desativos</p>
+              <p class="text-caption">Qtde. Incidentes Essa Semana</p>
               <p class="text-h3 mt-4">0</p>
             </div>
-            <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-off"></v-icon></div>
+            <!-- <div class="w-50 text-end"><v-icon class="text-h2" icon="mdi-account-off"></v-icon></div> -->
           </div>
         </v-card-item>
       </v-card>
