@@ -44,6 +44,10 @@
             <v-btn variant="text" text="Cadastro de Usuários" class="text-caption font-weight-regular" to="/usuarios"></v-btn>
           </v-list-item>
 
+          <v-list-item prepend-icon="mdi-settings" class="text-caption">
+            <v-btn variant="text" text="Monitoramento de EPIs" class="text-caption font-weight-regular" @click="abrirModal"></v-btn>
+          </v-list-item>
+
         </div>
 
       </v-list>
@@ -60,6 +64,9 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <a-p-i-integration ref="modalControl">
+
+    </a-p-i-integration>
 
     <slot />
   </v-app>
@@ -69,10 +76,12 @@
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCookies } from '@vueuse/integrations/useCookies'
+import APIIntegration from '~/components/APIIntegration.vue'
 
 const TitlePages = useTitlePagesStore()
 const pageTitle = ref(TitlePages.pageTitle)
 const drawerstate = ref(TitlePages.drawerstate)
+const modalControl = ref(null)
 
 const cookies = useCookies(['locale'])
 
@@ -106,6 +115,10 @@ const logout = () => {
         router.push('/')
       }
     })
+}
+
+const abrirModal = () => {
+  modalControl.value?.open()
 }
 </script>
 
